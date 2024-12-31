@@ -85,7 +85,7 @@ export default function SalePage() {
                                 <p className="text-gray-500 line-through text-sm">{product.originalPrice}</p>
                             </div>
                             <p className="text-sm text-gray-500 mb-4">{product.category}</p>
-                            <Button className="w-full" onClick={() => addToCart(product)}>Add to Cart</Button>
+                            {/* <Button className="w-full" onClick={() => addToCart(product)}>Add to Cart</Button> */}
                         </div>
                     </div>
                 ))}
