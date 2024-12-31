@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import MainHeader from './components/header/MainHeader'
+import MainHeader from "./components/Header/MainHeader"
 import HomePage from './pages/HomePage'
 import NewInPage from './pages/NewInPage'
 import JeansPage from './pages/JeansPage'
@@ -7,7 +7,6 @@ import TrousersPage from './pages/TrousersPage'
 import CargoPage from './pages/CargoPage'
 import SalePage from './pages/SalePage'
 import AuthPage from './pages/AuthPage'
-import { Button } from '@/components/ui/button'
 
 function App() {
   return (
