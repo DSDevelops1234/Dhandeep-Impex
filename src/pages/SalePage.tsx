@@ -1,5 +1,5 @@
-import { Button } from '@/components/ui/button'
-import { useShop } from '@/contexts/ShopContext'
+// import { Button } from '@/components/ui/button'
+// import { useShop } from '@/contexts/ShopContext'
 
 const saleProducts = [
     {
@@ -59,7 +59,7 @@ const saleProducts = [
 ]
 
 export default function SalePage() {
-    const { addToCart } = useShop()
+    // const { addToCart } = useShop()
 
     return (
         <div className="container mx-auto px-4 py-8">
