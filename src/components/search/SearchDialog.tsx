@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -6,12 +7,12 @@ import { Search } from 'lucide-react'
 
 // Mock product data
 const products = [
-    { id: 1, name: 'Slim Fit Jeans', category: 'Jeans' },
-    { id: 2, name: 'Cargo Pants', category: 'Cargo' },
-    { id: 3, name: 'Chino Trousers', category: 'Trousers' },
-    { id: 4, name: 'Skinny Jeans', category: 'Jeans' },
-    { id: 5, name: 'Wide Leg Trousers', category: 'Trousers' },
-    { id: 6, name: 'Cargo Shorts', category: 'Cargo' },
+    { id: 1, name: 'Slim Fit Jeans', category: 'Jeans', section: 'jeans' },
+    { id: 2, name: 'Cargo Pants', category: 'Cargo', section: 'cargo' },
+    { id: 3, name: 'Chino Trousers', category: 'Trousers', section: 'trousers' },
+    { id: 4, name: 'Skinny Jeans', category: 'Jeans', section: 'jeans' },
+    { id: 5, name: 'Wide Leg Trousers', category: 'Trousers', section: 'trousers' },
+    { id: 6, name: 'Cargo Shorts', category: 'Cargo', section: 'cargo' },
 ]
 
 export function SearchDialog() {
@@ -19,6 +20,7 @@ export function SearchDialog() {
     const [isOpen, setIsOpen] = useState(false)
     const [searchResults, setSearchResults] = useState<typeof products>([])
     const [hasSearched, setHasSearched] = useState(false)
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (searchQuery.trim() === '') {
@@ -47,6 +49,11 @@ export function SearchDialog() {
 
         setSearchResults(filteredProducts)
         setHasSearched(true)
+    }
+
+    const handleResultClick = (product: typeof products[0]) => {
+        setIsOpen(false)
+        navigate(`/${product.section}`, { state: { scrollTo: product.id } })
     }
 
     return (
@@ -79,7 +86,11 @@ export function SearchDialog() {
                             <h3 className="text-lg font-semibold mb-2">Search Results:</h3>
                             <ul className="space-y-2">
                                 {searchResults.map(product => (
-                                    <li key={product.id} className="flex justify-between">
+                                    <li
+                                        key={product.id}
+                                        className="flex justify-between cursor-pointer hover:bg-gray-100 p-2 rounded"
+                                        onClick={() => handleResultClick(product)}
+                                    >
                                         <span>{product.name}</span>
                                         <span className="text-gray-500">{product.category}</span>
                                     </li>
