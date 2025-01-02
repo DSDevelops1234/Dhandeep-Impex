@@ -10,6 +10,7 @@ import CargoTrouser from '../assets/images/CargoTrouser.png'
 import StraightFitBlackJeans from '../assets/images/StraightFitBlackJeans.png'
 import ThreeMan from '../assets/images/ThreeMan.png'
 import Jeans from '../assets/images/Jeans.png'
+import Herobg from '../assets/images/Herobg.png'
 
 const featuredCategories = [
     { name: 'Jeans', href: '/jeans', image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=926&q=80' },
@@ -67,7 +68,8 @@ export default function HomePage() {
             {/* Hero Section */}
             <section className="relative h-[600px] flex items-center">
                 <img
-                    src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                    // src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                    src={Herobg}
                     alt="Hero background"
                     className="absolute inset-0 w-full h-full object-cover"
                 />

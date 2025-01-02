@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { ShoppingBag, User, Menu } from 'lucide-react'
+// import { ShoppingBag, User, Menu } from 'lucide-react'
+import { ShoppingBag, Menu } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-// import { AuthModal } from '@/components/auth/AuthModal'
-// import { AuthModal } from '@shadcn/ui';
-// import { SearchDialog } from '@/components/search/SearchDialog'
+import { AuthModal } from '@/components/auth/AuthModal'
+import { SearchDialog } from '@/components/search/SearchDialog'
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 
 const navigation = [
@@ -59,11 +59,11 @@ export default function MainHeader() {
 
                     {/* Actions */}
                     <div className="flex items-center space-x-4">
-                        {/* <SearchDialog />
-                        <AuthModal /> */}
-                        <Button variant="ghost" size="icon" aria-label="User account" className="hidden md:inline-flex">
+                        <SearchDialog />
+                        <AuthModal />
+                        {/* <Button variant="ghost" size="icon" aria-label="User account" className="hidden md:inline-flex">
                             <User className="h-5 w-5" />
-                        </Button>
+                        </Button> */}
                         <Button variant="ghost" size="icon" aria-label="Shopping bag">
                             <ShoppingBag className="h-5 w-5" />
                         </Button>
@@ -75,7 +75,7 @@ export default function MainHeader() {
                                     <Menu className="h-5 w-5" />
                                 </Button>
                             </SheetTrigger>
-                            <SheetContent side="right" className="bg-white w-[300px] sm:w-[400px]">
+                            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
                                 <nav className="flex flex-col space-y-4 mt-8">
                                     {navigation.map((item) => (
                                         <Link
