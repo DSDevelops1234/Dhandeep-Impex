@@ -40,7 +40,7 @@ export default function MainHeader() {
                             className="h-10 w-auto"
                         />
                     </Link> */}
-                    <Link to="/" className="text-[8px] sm:text-2xl font-bold text-navy-900">
+                    <Link to="/" className="text-[10px] sm:text-2xl font-bold text-navy-900">
                         DHANDEEP IMPEX
                     </Link>
 
