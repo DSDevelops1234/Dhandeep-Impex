@@ -98,7 +98,7 @@ export function AuthModal() {
                     )}
                 </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="sm:max-w-[425px] bg-white">
                 {currentUser ? (
                     <div className="text-center">
                         <h2 className="text-2xl font-bold mb-4">Welcome, {currentUser.name}!</h2>
