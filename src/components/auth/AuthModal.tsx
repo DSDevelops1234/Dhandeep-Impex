@@ -14,7 +14,6 @@ export function AuthModal() {
     const [error, setError] = useState<string | null>(null)
     const [isOpen, setIsOpen] = useState(false)
     const [currentUser, setCurrentUser] = useState(getCurrentUser())
-    const [captchaToken, setCaptchaToken] = useState<string>('')
 
     const handleRegister = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -34,7 +33,7 @@ export function AuthModal() {
         }
 
         try {
-            await register(name, email, password, captchaToken)
+            await register(name, email, password, confirmPassword)
             setIsSuccess(true)
             setError('Please check your email to verify your account')
         } catch (err) {
@@ -74,10 +73,6 @@ export function AuthModal() {
         setIsOpen(false)
     }
 
-    const handleCaptchaChange = (token: string) => {
-        setCaptchaToken(token)
-    }
-
     const resetState = () => {
         setIsLoading(false)
         setIsSuccess(false)
@@ -98,11 +93,11 @@ export function AuthModal() {
                     )}
                 </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px] bg-white">
+            <DialogContent className="sm:max-w-[425px] bg-white dark:bg-[#252529]">
                 {currentUser ? (
                     <div className="text-center">
                         <h2 className="text-2xl font-bold mb-4">Welcome, {currentUser.name}!</h2>
-                        <Button onClick={handleLogout}>
+                        <Button onClick={handleLogout} variant="custom">
                             Logout
                         </Button>
                     </div>
@@ -122,7 +117,7 @@ export function AuthModal() {
                                     <Label htmlFor="password">Password</Label>
                                     <Input id="password" name="password" type="password" placeholder="Enter your password" required />
                                 </div>
-                                <Button type="submit" className="w-full" disabled={isLoading}>
+                                <Button type="submit" className="w-full" disabled={isLoading} variant="custom">
                                     {isLoading ? 'Logging in...' : 'Login'}
                                 </Button>
                                 {error && <p className="text-red-500 text-sm">{error}</p>}
@@ -147,12 +142,7 @@ export function AuthModal() {
                                     <Label htmlFor="confirm-password">Confirm Password</Label>
                                     <Input id="confirm-password" name="confirm-password" type="password" placeholder="Confirm your password" required />
                                 </div>
-                                {/* Captcha component would go here */}
-                                <div className="space-y-2">
-                                    <Label>Captcha</Label>
-                                    <Input type="text" placeholder="Enter captcha" onChange={(e) => handleCaptchaChange(e.target.value)} />
-                                </div>
-                                <Button type="submit" className="w-full" disabled={isLoading || !captchaToken}>
+                                <Button type="submit" className="w-full" disabled={isLoading} variant="custom">
                                     {isLoading ? 'Registering...' : 'Register'}
                                 </Button>
                                 {error && <p className="text-red-500 text-sm">{error}</p>}

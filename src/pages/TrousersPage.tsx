@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { useShop } from '@/contexts/ShopContext'
-
+import SlimFitDressTrouser from '../assets/images/SlimFitDressTrouser.png'
 const trouserProducts = [
     {
         id: 1,
@@ -13,7 +13,7 @@ const trouserProducts = [
         id: 2,
         name: 'Slim Fit Dress Trousers',
         price: '₹2,799',
-        image: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1980&q=80',
+        image: SlimFitDressTrouser,
         colors: ['Black', 'Charcoal', 'Light Grey'],
     },
     {
@@ -50,12 +50,12 @@ export default function TrousersPage() {
     const { addToCart } = useShop()
 
     return (
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-8 dark:dark:bg-[#252529] dark:text-gray-200">
             <h1 className="text-3xl font-bold mb-8">Trousers Collection</h1>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {trouserProducts.map((product) => (
-                    <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div key={product.id} className="bg-white rounded-lg shadow-2xl overflow-hidden dark:dark:bg-gray-900">
                         <div className="relative aspect-[3/4]">
                             <img
                                 src={product.image}
@@ -64,16 +64,16 @@ export default function TrousersPage() {
                             />
                         </div>
                         <div className="p-4">
-                            <h2 className="text-xl font-semibold mb-2">{product.name}</h2>
-                            <p className="text-gray-600 mb-2">{product.price}</p>
+                            <h2 className="text-xl font-semibold mb-2 dark:text-gray-200">{product.name}</h2>
+                            <p className="text-gray-600 mb-2 dark:text-gray-200">{product.price}</p>
                             <div className="flex space-x-2 mb-4">
                                 {product.colors.map((color) => (
-                                    <span key={color} className="text-sm text-gray-500">
+                                    <span key={color} className="text-sm text-gray-500 dark:text-gray-200">
                                         {color}
                                     </span>
                                 ))}
                             </div>
-                            <Button className="w-full" onClick={() => addToCart(product)}>Add to Cart</Button>
+                            <Button className="w-full" onClick={() => addToCart(product)} variant="custom">Add to Cart</Button>
                         </div>
                     </div>
                 ))}

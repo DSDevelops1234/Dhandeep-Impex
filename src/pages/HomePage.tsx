@@ -10,7 +10,6 @@ import CargoTrouser from '../assets/images/CargoTrouser.png'
 import StraightFitBlackJeans from '../assets/images/StraightFitBlackJeans.png'
 import ThreeMan from '../assets/images/ThreeMan.png'
 import Jeans from '../assets/images/Jeans.png'
-import Herobg from '../assets/images/Herobg.png'
 
 const featuredCategories = [
     { name: 'Jeans', href: '/jeans', image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=926&q=80' },
@@ -64,16 +63,15 @@ export default function HomePage() {
     const { addToCart } = useShop()
 
     return (
-        <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col min-h-screen dark:bg-[#252529] dark:text-white">
             {/* Hero Section */}
             <section className="relative h-[600px] flex items-center">
                 <img
-                    // src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                    src={Herobg}
+                    src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
                     alt="Hero background"
                     className="absolute inset-0 w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-black/40" />
+                <div className="absolute inset-0 bg-black/40 dark:bg-[#252529]/60" />
 
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="max-w-2xl text-white">
@@ -81,7 +79,10 @@ export default function HomePage() {
                         <p className="text-xl mb-8">
                             Explore our latest collection of premium jeans, trousers, and cargo pants crafted for style and comfort
                         </p>
-                        <Button asChild size="lg" className="bg-white text-navy-900 hover:bg-gray-100">
+                        {/* <Button asChild size="lg" className="bg-white text-navy-900 hover:bg-gray-100">
+                            <Link to="/new-in">Shop New Arrivals</Link>
+                        </Button> */}
+                        <Button asChild size="lg" variant="dark" className="bg-white text-navy-900 hover:bg-gray-100">
                             <Link to="/new-in">Shop New Arrivals</Link>
                         </Button>
                     </div>
@@ -112,12 +113,12 @@ export default function HomePage() {
             </section>
 
             {/* New Arrivals */}
-            <section className="py-16 bg-gray-50">
+            <section className="py-16 bg-gray-50 dark:bg-[#252529]">
                 <div className="container mx-auto px-4">
                     <h2 className="text-3xl font-bold text-center mb-12">New Arrivals</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {newArrivals.map((product) => (
-                            <div key={product.id} className="bg-white rounded-lg shadow-sm overflow-hidden">
+                            <div key={product.id} className="bg-gray-200 rounded-lg shadow-2xl overflow-hidden dark:bg-slate-800 dark:text-white">
                                 <div className="relative aspect-square">
                                     <img
                                         src={product.image}
@@ -128,13 +129,13 @@ export default function HomePage() {
                                 <div className="p-4">
                                     <h3 className="font-semibold mb-2">{product.name}</h3>
                                     <p className="text-gray-600 mb-2">{product.price}</p>
-                                    <Button className="w-full" onClick={() => addToCart(product)}>Add to Cart</Button>
+                                    <Button className="w-full" variant="custom" onClick={() => addToCart(product)}>Add to Cart</Button>
                                 </div>
                             </div>
                         ))}
                     </div>
                     <div className="text-center mt-8">
-                        <Button asChild variant="outline">
+                        <Button asChild variant="border">
                             <Link to="/new-in">View All New Arrivals</Link>
                         </Button>
                     </div>
@@ -160,7 +161,7 @@ export default function HomePage() {
             </section>
 
             {/* Process Section */}
-            <section className="py-16 bg-navy-900 text-white">
+            <section className="py-16 bg-navy-900 text-white dark:bg-dark-primary">
                 <div className="container mx-auto px-4">
                     <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -195,7 +196,7 @@ export default function HomePage() {
             </section>
 
             {/* Footer */}
-            <footer className="bg-navy-900 text-white py-12">
+            <footer className="bg-navy-900 text-white dark:bg-dark-primary py-12">
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                         <div>
@@ -230,7 +231,7 @@ export default function HomePage() {
                             </div>
                         </div>
                     </div>
-                    <div className="mt-8 pt-8 border-t border-gray-700 text-center text-gray-300">
+                    <div className="mt-8 pt-8 border-t border-gray-700 text-center text-gray-300 dark:text-gray-400">
                         <p>&copy; {new Date().getFullYear()} DENIMHUB. All rights reserved.</p>
                     </div>
                 </div>

@@ -1,12 +1,16 @@
 import { Button } from '@/components/ui/button'
 import { useShop } from '@/contexts/ShopContext'
-
+import SlimFitDarkWashJeans from '../assets/images/SlimFitDarkWashJeans.png'
+import CargoTrouser from '../assets/images/CargoTrouser.png'
+import SlimFitDressTrousers from '../assets/images/SlimFitDressTrouser.png'
+import RelaxedFitCargoPants from '../assets/images/Relaxed Fit Cargo Pants.png'
+import SkinnyFitBlackJeans from '../assets/images/SkinnyFitBlackJeans.png'
 const newProducts = [
     {
         id: 1,
         name: 'Slim Fit Dark Wash Jeans',
         price: '₹2,499',
-        image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=926&q=80',
+        image: SlimFitDarkWashJeans,
         category: 'Jeans',
     },
     {
@@ -18,9 +22,9 @@ const newProducts = [
     },
     {
         id: 3,
-        name: 'Cargo Joggers',
+        name: 'Cargo Trousers',
         price: '₹2,799',
-        image: 'https://images.unsplash.com/photo-1608236415053-3691791bbffe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
+        image: CargoTrouser,
         category: 'Cargo',
     },
     {
@@ -34,21 +38,21 @@ const newProducts = [
         id: 5,
         name: 'Slim Fit Dress Trousers',
         price: '₹2,699',
-        image: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1980&q=80',
+        image: SlimFitDressTrousers,
         category: 'Trousers',
     },
     {
         id: 6,
         name: 'Relaxed Fit Cargo Pants',
         price: '₹2,999',
-        image: 'https://images.unsplash.com/photo-1517438322307-e67111335449?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
+        image: RelaxedFitCargoPants,
         category: 'Cargo',
     },
     {
         id: 7,
         name: 'Skinny Fit Black Jeans',
         price: '₹2,599',
-        image: 'https://images.unsplash.com/photo-1618352319006-c22d99ae48e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
+        image: SkinnyFitBlackJeans,
         category: 'Jeans',
     },
     {
@@ -64,12 +68,12 @@ export default function NewInPage() {
     const { addToCart } = useShop()
 
     return (
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-8 dark:bg-[#252529] dark:text-white ">
             <h1 className="text-3xl font-bold mb-8">New Arrivals</h1>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {newProducts.map((product) => (
-                    <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div key={product.id} className="bg-white rounded-lg shadow-2xl overflow-hidden dark:bg-gray-900">
                         <div className="relative aspect-[3/4]">
                             <img
                                 src={product.image}
@@ -84,7 +88,7 @@ export default function NewInPage() {
                             <h2 className="text-lg font-semibold mb-2">{product.name}</h2>
                             <p className="text-gray-600 mb-2">{product.price}</p>
                             <p className="text-sm text-gray-500 mb-4">{product.category}</p>
-                            <Button className="w-full" onClick={() => addToCart(product)}>Add to Cart</Button>
+                            <Button className="w-full" onClick={() => addToCart(product)} variant="custom">Add to Cart</Button>
                         </div>
                     </div>
                 ))}

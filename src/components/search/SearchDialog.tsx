@@ -60,10 +60,10 @@ export function SearchDialog() {
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
                 <Button variant="ghost" size="icon" aria-label="Search">
-                    <Search className="h-5 w-5" />
+                    <Search className="h-5 w-5 " />
                 </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px] bg-white">
+            <DialogContent className="sm:max-w-[425px] bg-white dark:bg-[#252529] dark:border-[#252529]">
                 <form onSubmit={handleSearch} className="flex flex-col gap-4">
                     <div className="flex gap-2">
                         <Input
@@ -76,19 +76,20 @@ export function SearchDialog() {
                                     handleSearch()
                                 }
                             }}
+                            className="dark:text-white"
                             aria-label="Search products"
                         />
-                        <Button type="button" onClick={handleSearch}>Search</Button>
+                        <Button type="button" variant="custom" onClick={handleSearch}>Search</Button>
                     </div>
 
                     {hasSearched && searchResults.length > 0 && (
-                        <div className="mt-4">
+                        <div className="mt-4 dark:text-white">
                             <h3 className="text-lg font-semibold mb-2">Search Results:</h3>
                             <ul className="space-y-2">
                                 {searchResults.map(product => (
                                     <li
                                         key={product.id}
-                                        className="flex justify-between cursor-pointer hover:bg-gray-100 p-2 rounded"
+                                        className="flex justify-between cursor-pointer hover:bg-gray-100 p-2 rounded dark:hover:bg-black dark:hover:text-white"
                                         onClick={() => handleResultClick(product)}
                                     >
                                         <span>{product.name}</span>

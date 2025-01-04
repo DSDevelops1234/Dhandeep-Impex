@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import { ProductModal } from '@/components/ProductModal'
+import SkinnyFitJeansLandscape from '../assets/images/SkinnyFitJeansLandscape.png'
 
 const jeansProducts = [
   {
@@ -24,7 +25,7 @@ const jeansProducts = [
     id: 3,
     name: 'Skinny Fit Black Jeans',
     price: '₹2,699',
-    image: 'https://images.unsplash.com/photo-1618352319006-c22d99ae48e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
+    image: SkinnyFitJeansLandscape,
     description: 'Our Skinny Fit Black Jeans offer a sleek, modern look. The stretchy fabric ensures comfort while maintaining a sharp silhouette.',
     sizes: ['32', '34', '36', '38'],
   },
@@ -69,7 +70,7 @@ export default function JeansPage() {
   }, [location])
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 dark:dark:bg-[#252529] dark:text-gray-200">
       <h1 className="text-3xl font-bold mb-8">Jeans Collection</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
