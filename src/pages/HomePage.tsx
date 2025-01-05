@@ -196,30 +196,30 @@ export default function HomePage() {
             </section>
 
             {/* Footer */}
-            <footer className="bg-navy-900 text-white dark:bg-dark-primary py-12">
+            <footer className="bg-gray-200 text-navy-900 dark:bg-navy-900 dark:text-white dark:bg-dark-primary py-12">
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                         <div>
                             <h3 className="text-xl font-bold mb-4">DENIMHUB</h3>
-                            <p className="text-gray-300">Premium jeans and trousers for every style.</p>
+                            <p className="dark:text-gray-300">Premium jeans and trousers for every style.</p>
                         </div>
                         <div>
                             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
                             <ul className="space-y-2">
-                                <li><Link to="/new-in" className="hover:text-gray-300">New Arrivals</Link></li>
-                                <li><Link to="/jeans" className="hover:text-gray-300">Jeans</Link></li>
-                                <li><Link to="/trousers" className="hover:text-gray-300">Trousers</Link></li>
-                                <li><Link to="/cargo" className="hover:text-gray-300">Cargo</Link></li>
-                                <li><Link to="/sale" className="hover:text-gray-300">Sale</Link></li>
+                                <li><Link to="/new-in" className="hover:text-black dark:hover:text-gray-300">New Arrivals</Link></li>
+                                <li><Link to="/jeans" className="hover:text-black dark:hover:text-gray-300">Jeans</Link></li>
+                                <li><Link to="/trousers" className="hover:text-black dark:hover:text-gray-300">Trousers</Link></li>
+                                <li><Link to="/cargo" className="hover:text-black dark:hover:text-gray-300">Cargo</Link></li>
+                                <li><Link to="/sale" className="hover:text-black dark:hover:text-gray-300">Sale</Link></li>
                             </ul>
                         </div>
                         <div>
                             <h4 className="text-lg font-semibold mb-4">Customer Service</h4>
                             <ul className="space-y-2">
-                                <li><Link to="#" className="hover:text-gray-300">Contact Us</Link></li>
-                                <li><Link to="#" className="hover:text-gray-300">Shipping & Returns</Link></li>
-                                <li><Link to="#" className="hover:text-gray-300">Size Guide</Link></li>
-                                <li><Link to="#" className="hover:text-gray-300">FAQ</Link></li>
+                                <li><Link to="#" className="hover:text-black dark:hover:text-gray-300">Contact Us</Link></li>
+                                <li><Link to="#" className="hover:text-black dark:hover:text-gray-300">Shipping & Returns</Link></li>
+                                <li><Link to="#" className="hover:text-black dark:hover:text-gray-300">Size Guide</Link></li>
+                                <li><Link to="#" className="hover:text-black dark:hover:text-gray-300">FAQ</Link></li>
                             </ul>
                         </div>
                         <div>

@@ -7,10 +7,12 @@ import TrousersPage from './pages/TrousersPage'
 import CargoPage from './pages/CargoPage'
 import SalePage from './pages/SalePage'
 import AuthPage from './pages/AuthPage'
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 function App() {
   return (
     <div className="flex flex-col min-h-screen bg-white dark:bg-dark-background text-black dark:text-white">
+      <SpeedInsights />
       <MainHeader />
       <main className="pt-16">
         <Routes>
