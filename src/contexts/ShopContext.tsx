@@ -11,6 +11,7 @@ interface ShopContextType {
     cart: Product[]
     addToCart: (product: Product) => void
     removeFromCart: (productId: number) => void
+    isLoggedIn: boolean;
 }
 
 const ShopContext = createContext<ShopContextType | undefined>(undefined)
@@ -34,8 +35,10 @@ export const ShopProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         setCart((prevCart) => prevCart.filter((item) => item.id !== productId))
     }
 
+    const [isLoggedIn] = useState<boolean>(false);
+
     return (
-        <ShopContext.Provider value={{ cart, addToCart, removeFromCart }}>
+        <ShopContext.Provider value={{ cart, addToCart, removeFromCart, isLoggedIn }}>
             {children}
         </ShopContext.Provider>
     )
