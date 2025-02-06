@@ -43,4 +43,3 @@ export const ShopProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         </ShopContext.Provider>
     )
 }
-
