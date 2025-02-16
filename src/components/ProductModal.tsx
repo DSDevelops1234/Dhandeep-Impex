@@ -1,145 +1,397 @@
-// ProductModal.tsx
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
+// import { useShop } from '@/contexts/ShopContext';
+// import { useEffect, useState } from 'react';
+
+// const sizes = Array.from({ length: 6 }, (_, i) => 28 + i * 2).map(String);
+
+// type AccordionSection = {
+//     title: string;
+//     content: string | string[] | JSX.Element;
+//     format?: 'list' | 'paragraph' | 'uppercase';
+// };
+
+// export default function ProductModal() {
+//     const {
+//         isModalOpen,
+//         selectedProduct,
+//         selectedSize,
+//         closeProductModal,
+//         selectSize,
+//         addToCart,
+//         handleBuyNow,
+//     } = useShop();
+//     const [isDisclaimerOpen, setIsDisclaimerOpen] = useState(false);
+
+//     useEffect(() => {
+//         if (isModalOpen) {
+//             document.body.style.overflow = 'hidden';
+//         } else {
+//             document.body.style.overflow = 'auto';
+//         }
+//         return () => {
+//             document.body.style.overflow = 'auto';
+//         };
+//     }, [isModalOpen]);
+
+//     if (!isModalOpen || !selectedProduct) return null;
+
+//     // Dynamic accordion sections
+//     const accordionSections: AccordionSection[] = [
+//         {
+//             title: 'Product Details',
+//             content: selectedProduct.details || [],
+//             format: 'list',
+//         },
+//         {
+//             title: 'Disclaimer',
+//             content: selectedProduct.disclaimer || '',
+//             format: 'paragraph',
+//         },
+//         {
+//             title: 'Size & Fit',
+//             content: selectedProduct.sizeFit || [],
+//             format: 'list',
+//         },
+//         {
+//             title: 'Complete the Look',
+//             content: selectedProduct.lookDescription || '',
+//             format: 'paragraph',
+//         },
+//         {
+//             title: 'Manufacturer Details',
+//             content: selectedProduct.manufacturer || '',
+//             format: 'uppercase',
+//         },
+//         {
+//             title: 'Contact',
+//             content: selectedProduct.contact || '',
+//             format: 'paragraph',
+//         },
+//         {
+//             title: 'Country of Origin',
+//             content: selectedProduct.origin || '',
+//             format: 'uppercase',
+//         },
+//     ];
+
+//     const renderContent = (section: AccordionSection) => {
+//         if (!section.content) return null;
+
+//         switch (section.format) {
+//             case 'list':
+//                 return (
+//                     <ul className="list-disc pl-4 text-sm mt-2">
+//                         {(section.content as string[]).map((item, index) => (
+//                             <li key={index}>{item}</li>
+//                         ))}
+//                     </ul>
+//                 );
+//             case 'uppercase':
+//                 return <p className="uppercase text-sm">{section.content}</p>;
+//             default:
+//                 return <p className="text-sm">{section.content}</p>;
+//         }
+//     };
+
+//     return (
+//         <div
+//             className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+//             onClick={closeProductModal}
+//         >
+//             <div
+//                 className="bg-white dark:bg-gray-900 rounded-lg flex max-w-3xl w-full h-[90vh] overflow-hidden"
+//                 onClick={(e) => e.stopPropagation()}
+//             >
+//                 {/* Product Image */}
+//                 <div className="w-1/2 p-6 h-full">
+//                     <div className="h-full overflow-hidden rounded-lg">
+//                         <img
+//                             src={selectedProduct.image}
+//                             alt={selectedProduct.name}
+//                             className="w-full h-full object-cover"
+//                         />
+//                     </div>
+//                 </div>
+
+//                 {/* Product Details */}
+//                 <div className="w-1/2 p-6 flex flex-col overflow-y-auto">
+//                     <div className="space-y-4">
+//                         <h2 className="text-2xl font-bold dark:text-white">
+//                             {selectedProduct.name}
+//                         </h2>
+//                         <p className="text-gray-600 dark:text-gray-300">
+//                             {selectedProduct.description || 'Product description'}
+//                         </p>
+
+//                         {/* Size Selection */}
+//                         <div className="space-y-2">
+//                             <h3 className="font-semibold dark:text-white">Select Size</h3>
+//                             <div className="flex flex-wrap gap-2">
+//                                 {sizes.map((size) => (
+//                                     <button
+//                                         key={size}
+//                                         onClick={() => selectSize(size)}
+//                                         className={`px-4 py-2 rounded ${selectedSize === size
+//                                             ? 'bg-denim-500 text-white'
+//                                             : 'bg-gray-200 dark:bg-gray-700 dark:text-white'
+//                                             }`}
+//                                     >
+//                                         {size}
+//                                     </button>
+//                                 ))}
+//                             </div>
+//                         </div>
+
+//                         {/* Buttons */}
+//                         <div className="flex gap-4 py-4">
+//                             <button
+//                                 onClick={() => handleBuyNow(selectedProduct, selectedSize)}
+//                                 className="bg-denim-500 text-white px-6 py-2 rounded flex-1"
+//                             >
+//                                 Buy Now
+//                             </button>
+//                             <button
+//                                 onClick={() => addToCart(selectedProduct, selectedSize)}
+//                                 className="border-2 border-denim-500 text-denim-500 px-6 py-2 rounded flex-1 dark:text-white"
+//                             >
+//                                 Add to Cart
+//                             </button>
+//                         </div>
+
+//                         {/* Accordion Content */}
+//                         <div className="border-t pt-4">
+//                             <div
+//                                 className="flex justify-between items-center cursor-pointer"
+//                                 onClick={() => setIsDisclaimerOpen(!isDisclaimerOpen)}
+//                             >
+//                                 <h3 className="font-semibold dark:text-white">
+//                                     Product Information
+//                                 </h3>
+//                                 <span className="text-xl">{isDisclaimerOpen ? '−' : '+'}</span>
+//                             </div>
+//                             {isDisclaimerOpen && (
+//                                 <div className="pt-4 space-y-6">
+//                                     {accordionSections.map((section, index) => (
+//                                         section.content && (
+//                                             <div key={index}>
+//                                                 <p className="font-extrabold text-sm mb-2">{section.title}</p>
+//                                                 {section.title === 'Disclaimer' ? (
+//                                                     // Wrap the disclaimer in a container that scrolls if the content is too tall
+//                                                     <div className="max-h-40 overflow-y-auto">
+//                                                         {renderContent(section)}
+//                                                     </div>
+//                                                 ) : (
+//                                                     renderContent(section)
+//                                                 )}
+//                                             </div>
+//                                         )
+//                                     ))}
+
+//                                 </div>
+//                             )}
+//                         </div>
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// }
+
+
 import { useShop } from '@/contexts/ShopContext';
-import { toast } from 'react-hot-toast';
+import { useEffect, useState } from 'react';
 
-interface Product {
-    id: number;
-    name: string;
-    price: string;
-    image: string;
-    description: string;
-    sizes: string[];
-}
+const sizes = Array.from({ length: 6 }, (_, i) => 28 + i * 2).map(String);
 
-interface CartProduct extends Omit<Product, 'sizes'> {
-    size: string; // Add a required size property
-}
+type AccordionSection = {
+    title: string;
+    content: string | string[] | JSX.Element;
+    format?: 'list' | 'paragraph' | 'uppercase';
+};
 
-interface ProductModalProps {
-    product: Product;
-}
+export default function ProductModal() {
+    const {
+        isModalOpen,
+        selectedProduct,
+        selectedSize,
+        closeProductModal,
+        selectSize,
+        addToCart,
+        handleBuyNow,
+    } = useShop();
+    const [isDisclaimerOpen, setIsDisclaimerOpen] = useState(false);
 
-export function ProductModal({ product }: ProductModalProps) {
-    const [selectedSize, setSelectedSize] = useState<string | null>(null);
-    const [errorMessage, setErrorMessage] = useState('');
-    const { addToCart } = useShop();
-    const [isOpen, setIsOpen] = useState(false);
-    const navigate = useNavigate();
-
-    const handleSizeSelect = (size: string) => {
-        setSelectedSize(size);
-        setErrorMessage(''); // Clear the error message when a size is selected
-    };
-
-    const handleAddToCart = () => {
-        console.log('Add to Cart clicked'); // Debugging
-        if (!selectedSize) {
-            console.log('No size selected'); // Debugging
-            toast.error('Please select a size before adding to cart');
-            return;
+    useEffect(() => {
+        if (isModalOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
         }
 
-        const cartProduct: CartProduct = {
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            image: product.image,
-            description: product.description,
-            size: selectedSize,
+        return () => {
+            document.body.style.overflow = 'auto';
         };
-        addToCart(cartProduct);
-        toast.success(`${product.name} (Size: ${selectedSize}) added to cart`);
-        setIsOpen(false);
-    };
+    }, [isModalOpen]);
 
-    const handleBuyNowClick = () => {
-        if (!selectedSize) {
-            setErrorMessage('Please select a size first.');
-            console.log('Error Message:', 'Please select a size first.'); // Debugging
-        } else {
-            navigate('/buynowpage', { state: { product: { ...product, size: selectedSize } } });
+    if (!isModalOpen || !selectedProduct) return null;
+
+    // Build the accordion sections dynamically
+    const accordionSections: AccordionSection[] = [
+        {
+            title: 'Product Details',
+            content: selectedProduct.details || [],
+            format: 'list',
+        },
+        {
+            title: 'Disclaimer',
+            content: selectedProduct.disclaimer || '',
+            format: 'paragraph',
+        },
+        {
+            title: 'Size & Fit',
+            content: selectedProduct.sizeFit || [],
+            format: 'list',
+        },
+        {
+            title: 'Complete the Look',
+            content: selectedProduct.lookDescription || '',
+            format: 'paragraph',
+        },
+        {
+            title: 'Manufacturer Details',
+            content: selectedProduct.manufacturer || '',
+            format: 'uppercase',
+        },
+        {
+            title: 'Contact',
+            content: selectedProduct.contact || '',
+            format: 'paragraph',
+        },
+        {
+            title: 'Country of Origin',
+            content: selectedProduct.origin || '',
+            format: 'uppercase',
+        },
+    ];
+
+    const renderContent = (section: AccordionSection) => {
+        if (!section.content) return null;
+
+        switch (section.format) {
+            case 'list':
+                return (
+                    <ul className="list-disc pl-4 text-sm mt-2">
+                        {(section.content as string[]).map((item, index) => (
+                            <li key={index}>{item}</li>
+                        ))}
+                    </ul>
+                );
+            case 'uppercase':
+                return <p className="uppercase text-sm">{section.content}</p>;
+            default:
+                return <p className="text-sm">{section.content}</p>;
         }
     };
 
     return (
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
-            <DialogTrigger asChild>
-                <div className="cursor-pointer transition-all duration-300 hover:shadow-lg">
-                    <img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full h-64 object-cover rounded-t-lg"
-                    />
-                    <div className="p-4 bg-white dark:bg-dark-secondary rounded-b-lg">
-                        <h3 className="text-lg font-semibold">{product.name}</h3>
-                        <p className="text-gray-600">{product.price}</p>
-                    </div>
-                </div>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-[900px] p-0 overflow-hidden bg-white dark:bg-[#252529] dark:border-none dark:text-white">
-                <div className="flex flex-col md:flex-row">
-                    <div className="md:w-1/2">
+        <div
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+            onClick={closeProductModal}
+        >
+            <div
+                className="bg-white dark:bg-gray-900 rounded-lg flex max-w-3xl w-full h-[90vh] overflow-hidden"
+                onClick={(e) => e.stopPropagation()}
+            >
+                {/* Left Side – Product Image */}
+                <div className="w-1/2 p-6 h-full">
+                    <div className="h-full overflow-hidden rounded-lg">
                         <img
-                            src={product.image}
-                            alt={product.name}
+                            src={selectedProduct.image}
+                            alt={selectedProduct.name}
                             className="w-full h-full object-cover"
                         />
                     </div>
-                    <div className="md:w-1/2 p-6 space-y-4">
-                        <h2 className="text-2xl font-bold">{product.name}</h2>
-                        <p className="text-xl font-semibold">{product.price}</p>
-                        <p className="text-gray-600 dark:text-gray-300">{product.description}</p>
-                        <div>
-                            <h3 className="text-lg font-semibold mb-2">Select Size:</h3>
-                            <div className="flex space-x-2">
-                                {product.sizes.map((size) => (
-                                    <Button
+                </div>
+
+                {/* Right Side – Product Details */}
+                <div className="w-1/2 p-6 flex flex-col overflow-y-auto">
+                    <div className="space-y-4">
+                        <h2 className="text-2xl font-bold dark:text-white">
+                            {selectedProduct.name}
+                        </h2>
+                        <p className="text-gray-600 dark:text-gray-300">
+                            {selectedProduct.description || 'Product description'}
+                        </p>
+
+                        {/* Size selection */}
+                        <div className="space-y-2">
+                            <h3 className="font-semibold dark:text-white">Select Size</h3>
+                            <div className="flex flex-wrap gap-2">
+                                {sizes.map((size) => (
+                                    <button
                                         key={size}
-                                        variant={selectedSize === size ? 'default' : 'outline'}
-                                        onClick={() => handleSizeSelect(size)}
-                                        className={
-                                            selectedSize === size
-                                                ? 'bg-primary text-white'
-                                                : 'border dark:border-gray-700 dark:text-white'
-                                        }
+                                        onClick={() => selectSize(size)}
+                                        className={`px-4 py-2 rounded ${selectedSize === size
+                                            ? 'bg-denim-500 text-white'
+                                            : 'bg-gray-200 dark:bg-gray-700 dark:text-white'
+                                            }`}
                                     >
                                         {size}
-                                    </Button>
+                                    </button>
                                 ))}
                             </div>
                         </div>
-                        {/* Error message displayed here */}
-                        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-                        <div className="space-y-2">
-                            <Button
-                                onClick={handleAddToCart}
-                                className="w-full"
-                                disabled={!selectedSize}
-                            >
-                                Add to Cart
-                            </Button>
-                            <Button
-                                onClick={handleBuyNowClick}
-                                className="w-full"
-                                disabled={!selectedSize}
+
+                        {/* Action buttons */}
+                        <div className="flex gap-4 py-4">
+                            <button
+                                onClick={() => handleBuyNow(selectedProduct, selectedSize)}
+                                className="bg-denim-500 text-white px-6 py-2 rounded flex-1"
                             >
                                 Buy Now
-                            </Button>
+                            </button>
+                            <button
+                                onClick={() => addToCart(selectedProduct, selectedSize)}
+                                className="border-2 border-denim-500 text-denim-500 px-6 py-2 rounded flex-1 dark:text-white"
+                            >
+                                Add to Cart
+                            </button>
                         </div>
-                        <div className="border-t pt-4 mt-4">
-                            <h3 className="text-lg font-semibold mb-2">Return Policy:</h3>
-                            <p className="text-sm text-gray-600 dark:text-gray-300">
-                                We offer a 30-day return policy for all unworn items in their original condition.
-                                Please see our full return policy for more details.
-                            </p>
+
+                        {/* Accordion for product information */}
+                        <div className="border-t pt-4 overflow-y-auto max-h-60 ">
+                            <div
+                                className="flex justify-between items-center cursor-pointer"
+                                onClick={() => setIsDisclaimerOpen(!isDisclaimerOpen)}
+                            >
+                                <h3 className="font-semibold dark:text-white">Product Information</h3>
+                                <span className="text-xl">{isDisclaimerOpen ? '−' : '+'}</span>
+                            </div>
+                            {isDisclaimerOpen && (
+                                <div className="pt-4 space-y-6">
+                                    {accordionSections.map((section, index) =>
+                                        section.content ? (
+                                            <div key={index}>
+                                                <p className="font-extrabold text-sm mb-2">
+                                                    {section.title}
+                                                </p>
+                                                {section.title === 'Disclaimer' ? (
+                                                    // Wrap the disclaimer in a scrollable container
+                                                    <div className="max-h-40 overflow-y-auto">
+                                                        {renderContent(section)}
+                                                    </div>
+
+                                                ) : (
+                                                    renderContent(section)
+                                                )}
+                                            </div>
+                                        ) : null
+                                    )}
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
-            </DialogContent>
-        </Dialog>
+            </div>
+        </div>
     );
 }

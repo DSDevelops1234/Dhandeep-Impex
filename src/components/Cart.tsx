@@ -1,10 +1,10 @@
-import { useShop } from '@/contexts/ShopContext'
-import { Button } from '@/components/ui/button'
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
-import { ShoppingBag } from 'lucide-react'
+import { useShop } from '@/contexts/ShopContext';
+import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { ShoppingBag } from 'lucide-react';
 
 export function Cart() {
-    const { cart, removeFromCart, isLoggedIn } = useShop()
+    const { cart, removeFromCart } = useShop(); // ✅ Properly using cart
 
     return (
         <Sheet>
@@ -22,31 +22,25 @@ export function Cart() {
                 <SheetHeader>
                     <SheetTitle>Your Cart</SheetTitle>
                 </SheetHeader>
-                {isLoggedIn ? (
-                    <>
-                        {cart.length === 0 ? (
-                            <p>Your cart is empty.</p>
-                        ) : (
-                            <div className="space-y-4">
-                                {cart.map((item, index) => (
-                                    <div key={index} className="flex justify-between items-center">
-                                        <div>
-                                            <p className="font-semibold">{item.name}</p>
-                                            <p>{item.price}</p>
-                                        </div>
-                                        <Button variant="destructive" onClick={() => removeFromCart(item.id)}>
-                                            Remove
-                                        </Button>
-                                    </div>
-                                ))}
-                                <Button className="w-full">Proceed to Checkout</Button>
-                            </div>
-                        )}
-                    </>
+                {cart.length === 0 ? (
+                    <p>Your cart is empty.</p>
                 ) : (
-                    <p>Please log in to view your cart.</p>
+                    <div className="space-y-4">
+                        {cart.map((item, index) => (
+                            <div key={index} className="flex justify-between items-center">
+                                <div>
+                                    <p className="font-semibold">{item.name}</p>
+                                    <p>{item.price}</p>
+                                </div>
+                                <Button variant="destructive" onClick={() => removeFromCart(item.id)}>
+                                    Remove
+                                </Button>
+                            </div>
+                        ))}
+                        <Button className="w-full">Proceed to Checkout</Button>
+                    </div>
                 )}
             </SheetContent>
         </Sheet>
-    )
+    );
 }
