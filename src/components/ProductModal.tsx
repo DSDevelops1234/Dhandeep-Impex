@@ -1,5 +1,9 @@
+// // ProductModal.tsx
+
 // import { useShop } from '@/contexts/ShopContext';
 // import { useEffect, useState } from 'react';
+// import { useToast } from '@/hooks/use-toast';
+// import { useNavigate } from 'react-router-dom';
 
 // const sizes = Array.from({ length: 6 }, (_, i) => 28 + i * 2).map(String);
 
@@ -20,6 +24,8 @@
 //         handleBuyNow,
 //     } = useShop();
 //     const [isDisclaimerOpen, setIsDisclaimerOpen] = useState(false);
+//     const { toast } = useToast();
+//     const navigate = useNavigate();
 
 //     useEffect(() => {
 //         if (isModalOpen) {
@@ -27,6 +33,7 @@
 //         } else {
 //             document.body.style.overflow = 'auto';
 //         }
+
 //         return () => {
 //             document.body.style.overflow = 'auto';
 //         };
@@ -34,7 +41,7 @@
 
 //     if (!isModalOpen || !selectedProduct) return null;
 
-//     // Dynamic accordion sections
+//     // Build the accordion sections dynamically
 //     const accordionSections: AccordionSection[] = [
 //         {
 //             title: 'Product Details',
@@ -92,6 +99,20 @@
 //         }
 //     };
 
+//     const handleBuyNowClick = () => {
+//         if (!selectedSize) {
+//             toast({
+//                 title: "Select a size first",
+//                 description: "Please choose a size before proceeding to buy.",
+//                 variant: "destructive",
+//                 style: { backgroundColor: 'white' },
+//             });
+//             return;
+//         }
+//         handleBuyNow(selectedProduct, selectedSize);
+//         navigate('/BuyNowPage');
+//     };
+
 //     return (
 //         <div
 //             className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
@@ -101,7 +122,7 @@
 //                 className="bg-white dark:bg-gray-900 rounded-lg flex max-w-3xl w-full h-[90vh] overflow-hidden"
 //                 onClick={(e) => e.stopPropagation()}
 //             >
-//                 {/* Product Image */}
+//                 {/* Left Side – Product Image */}
 //                 <div className="w-1/2 p-6 h-full">
 //                     <div className="h-full overflow-hidden rounded-lg">
 //                         <img
@@ -112,7 +133,7 @@
 //                     </div>
 //                 </div>
 
-//                 {/* Product Details */}
+//                 {/* Right Side – Product Details */}
 //                 <div className="w-1/2 p-6 flex flex-col overflow-y-auto">
 //                     <div className="space-y-4">
 //                         <h2 className="text-2xl font-bold dark:text-white">
@@ -122,7 +143,7 @@
 //                             {selectedProduct.description || 'Product description'}
 //                         </p>
 
-//                         {/* Size Selection */}
+//                         {/* Size selection */}
 //                         <div className="space-y-2">
 //                             <h3 className="font-semibold dark:text-white">Select Size</h3>
 //                             <div className="flex flex-wrap gap-2">
@@ -141,10 +162,10 @@
 //                             </div>
 //                         </div>
 
-//                         {/* Buttons */}
+//                         {/* Action buttons */}
 //                         <div className="flex gap-4 py-4">
 //                             <button
-//                                 onClick={() => handleBuyNow(selectedProduct, selectedSize)}
+//                                 onClick={handleBuyNowClick}
 //                                 className="bg-denim-500 text-white px-6 py-2 rounded flex-1"
 //                             >
 //                                 Buy Now
@@ -157,25 +178,32 @@
 //                             </button>
 //                         </div>
 
-//                         {/* Accordion Content */}
-//                         <div className="border-t pt-4">
+//                         {/* Accordion for product information */}
+//                         <div
+//                             className="border-t pt-4 overflow-y-auto max-h-60"
+//                             style={{
+//                                 overflowY: 'scroll',
+//                                 scrollbarWidth: 'none',
+//                                 WebkitOverflowScrolling: 'touch',
+//                                 msOverflowStyle: 'none',
+//                             }}
+//                         >
 //                             <div
 //                                 className="flex justify-between items-center cursor-pointer"
 //                                 onClick={() => setIsDisclaimerOpen(!isDisclaimerOpen)}
 //                             >
-//                                 <h3 className="font-semibold dark:text-white">
-//                                     Product Information
-//                                 </h3>
+//                                 <h3 className="font-semibold dark:text-white">Product Information</h3>
 //                                 <span className="text-xl">{isDisclaimerOpen ? '−' : '+'}</span>
 //                             </div>
 //                             {isDisclaimerOpen && (
 //                                 <div className="pt-4 space-y-6">
-//                                     {accordionSections.map((section, index) => (
-//                                         section.content && (
+//                                     {accordionSections.map((section, index) =>
+//                                         section.content ? (
 //                                             <div key={index}>
-//                                                 <p className="font-extrabold text-sm mb-2">{section.title}</p>
+//                                                 <p className="font-extrabold text-sm mb-2">
+//                                                     {section.title}
+//                                                 </p>
 //                                                 {section.title === 'Disclaimer' ? (
-//                                                     // Wrap the disclaimer in a container that scrolls if the content is too tall
 //                                                     <div className="max-h-40 overflow-y-auto">
 //                                                         {renderContent(section)}
 //                                                     </div>
@@ -183,9 +211,8 @@
 //                                                     renderContent(section)
 //                                                 )}
 //                                             </div>
-//                                         )
-//                                     ))}
-
+//                                         ) : null
+//                                     )}
 //                                 </div>
 //                             )}
 //                         </div>
@@ -196,9 +223,10 @@
 //     );
 // }
 
-
 import { useShop } from '@/contexts/ShopContext';
 import { useEffect, useState } from 'react';
+import { useToast } from '@/hooks/use-toast';
+import { useNavigate } from 'react-router-dom';
 
 const sizes = Array.from({ length: 6 }, (_, i) => 28 + i * 2).map(String);
 
@@ -219,14 +247,11 @@ export default function ProductModal() {
         handleBuyNow,
     } = useShop();
     const [isDisclaimerOpen, setIsDisclaimerOpen] = useState(false);
+    const { toast } = useToast();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        if (isModalOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'auto';
-        }
-
+        document.body.style.overflow = isModalOpen ? 'hidden' : 'auto';
         return () => {
             document.body.style.overflow = 'auto';
         };
@@ -234,7 +259,6 @@ export default function ProductModal() {
 
     if (!isModalOpen || !selectedProduct) return null;
 
-    // Build the accordion sections dynamically
     const accordionSections: AccordionSection[] = [
         {
             title: 'Product Details',
@@ -275,7 +299,6 @@ export default function ProductModal() {
 
     const renderContent = (section: AccordionSection) => {
         if (!section.content) return null;
-
         switch (section.format) {
             case 'list':
                 return (
@@ -290,6 +313,22 @@ export default function ProductModal() {
             default:
                 return <p className="text-sm">{section.content}</p>;
         }
+    };
+
+    const handleBuyNowClick = () => {
+        if (!selectedSize) {
+            toast({
+                title: 'Select a size first',
+                description: 'Please choose a size before proceeding to buy.',
+                variant: 'destructive',
+                style: { backgroundColor: 'white' },
+            });
+            return;
+        }
+        handleBuyNow(selectedProduct, selectedSize);
+        navigate('/BuyNowPage', {
+            state: { product: { ...selectedProduct, size: selectedSize } },
+        });
     };
 
     return (
@@ -344,7 +383,7 @@ export default function ProductModal() {
                         {/* Action buttons */}
                         <div className="flex gap-4 py-4">
                             <button
-                                onClick={() => handleBuyNow(selectedProduct, selectedSize)}
+                                onClick={handleBuyNowClick}
                                 className="bg-denim-500 text-white px-6 py-2 rounded flex-1"
                             >
                                 Buy Now
@@ -358,7 +397,15 @@ export default function ProductModal() {
                         </div>
 
                         {/* Accordion for product information */}
-                        <div className="border-t pt-4 overflow-y-auto max-h-60 ">
+                        <div
+                            className="border-t pt-4 overflow-y-auto max-h-60"
+                            style={{
+                                overflowY: 'scroll',
+                                scrollbarWidth: 'none',
+                                WebkitOverflowScrolling: 'touch',
+                                msOverflowStyle: 'none',
+                            }}
+                        >
                             <div
                                 className="flex justify-between items-center cursor-pointer"
                                 onClick={() => setIsDisclaimerOpen(!isDisclaimerOpen)}
@@ -371,15 +418,11 @@ export default function ProductModal() {
                                     {accordionSections.map((section, index) =>
                                         section.content ? (
                                             <div key={index}>
-                                                <p className="font-extrabold text-sm mb-2">
-                                                    {section.title}
-                                                </p>
+                                                <p className="font-extrabold text-sm mb-2">{section.title}</p>
                                                 {section.title === 'Disclaimer' ? (
-                                                    // Wrap the disclaimer in a scrollable container
                                                     <div className="max-h-40 overflow-y-auto">
                                                         {renderContent(section)}
                                                     </div>
-
                                                 ) : (
                                                     renderContent(section)
                                                 )}
